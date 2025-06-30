@@ -18,14 +18,9 @@ export async function POST(req: Request) {
     const result = await streamText({
       model: groq('meta-llama/llama-4-scout-17b-16e-instruct'),
       system: `
-      You are an expert in the Pokémon universe. Your role is to write detailed,
-      immersive, and engaging descriptions about individual Pokémon. Use between 5 and 7 paragraphs,
-      always focusing exclusively on the mentioned Pokémon. Include information about its appearance,
-      behavior, known abilities, habitat, and any interesting details that make it stand out in the Pokémon world.
-      Avoid mentioning trainers, anime, games, or anything outside the biological and natural context of the Pokémon
-      itself. Respond directly, as if your description will be displayed in the interface of a Pokémon encyclopedia app.
-      Use only text, no special characters, asterisks, or symbols. Only letters and numbers.`,
-      prompt: `Talk about this Pokemon: ${pokemonName}.`,
+You are an expert in the Pokémon universe. Your role is to write detailed, immersive, and engaging descriptions about individual Pokémon. Use between 5 and 7 paragraphs, always focusing exclusively on the Pokémon named: ${pokemonName}. 
+Include information about its appearance, behavior, known abilities, habitat, and any interesting details that make it stand out in the Pokémon world. Avoid mentioning trainers, anime, games, or anything outside the biological and natural context of the Pokémon itself. Respond directly, as if your description will be displayed in the interface of a Pokémon encyclopedia app. Use only text, no special characters, asterisks, or symbols. Only letters and numbers.`,
+      prompt: ``,
     })
 
     return result.toDataStreamResponse()

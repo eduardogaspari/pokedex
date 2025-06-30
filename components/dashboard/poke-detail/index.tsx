@@ -318,11 +318,17 @@ export function PokeDetail() {
                     )
                     .join(' ')
                     .split(/\n{2,}/)
-                    .map((paragraph, idx) => (
-                      <div key={idx}>
-                        <p>{paragraph.trim()}</p>
-                      </div>
-                    ))
+                    .map((paragraph, idx) => {
+                      const trimmed = paragraph.trim()
+                      const content =
+                        idx === 0 ? trimmed.replace(/^\S+\s*/, '') : trimmed
+
+                      return (
+                        <div key={idx}>
+                          <p>{content}</p>
+                        </div>
+                      )
+                    })
                 )}
               </div>
             </Accent>
