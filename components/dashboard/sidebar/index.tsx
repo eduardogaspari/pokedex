@@ -176,6 +176,9 @@ export function Sidebar() {
 
         {/* TODO => Loading component with a cool animation. */}
 
+        {hasMore && !loading && (
+          <li ref={loadingTriggerRef} style={{ height: '1px' }} />
+        )}
         {loading && <Loading />}
         {hasMore && !loading && <Loading />}
         {!hasMore && filteredPokemons.length > 0 && (
