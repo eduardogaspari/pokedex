@@ -66,5 +66,6 @@ export function usePokemon() {
   if (!context) {
     throw new Error('usePokemon must be used within a PokemonProvider')
   }
+
   return context
 }

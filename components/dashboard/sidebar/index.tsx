@@ -33,7 +33,7 @@ export function Sidebar() {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 300)
 
-  const { setSelectedPokemon } = usePokemon()
+  const { selectedPokemon, setSelectedPokemon } = usePokemon()
 
   const [hasMore, setHasMore] = useState(true)
   const observerRef = useRef<IntersectionObserver | null>(null)
@@ -123,6 +123,12 @@ export function Sidebar() {
     )
   }, [debouncedSearch, pokemons])
 
+  useEffect(() => {
+    if (filteredPokemons.length > 0 && !selectedPokemon) {
+      setSelectedPokemon(filteredPokemons[0])
+    }
+  }, [filteredPokemons, selectedPokemon, setSelectedPokemon])
+
   if (error) {
     return <S.Container>error</S.Container>
   }
@@ -159,6 +165,7 @@ export function Sidebar() {
         {filteredPokemons.map((pokemon) => (
           <S.PokemonItem
             key={pokemon.id}
+            selected={selectedPokemon?.id === pokemon.id}
             onClick={() => setSelectedPokemon(pokemon)}
           >
             #{pokemon.id.toString().padStart(3, '0')} -{' '}

@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface PokemonItemProps {
+  selected?: boolean
+}
+
 export const Container = styled.aside`
   padding: 2rem;
   overflow: hidden;
@@ -106,7 +110,7 @@ export const PokemonList = styled.ul`
   scrollbar-color: black transparent;
 `
 
-export const PokemonItem = styled.li`
+export const PokemonItem = styled.li<PokemonItemProps>`
   width: 100%;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
@@ -118,4 +122,12 @@ export const PokemonItem = styled.li`
   &:hover {
     opacity: 0.8;
   }
+
+  ${({ selected }) =>
+    selected &&
+    `
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1.1rem;
+  `}
 `
