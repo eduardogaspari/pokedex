@@ -54,15 +54,41 @@ export const Container = styled.aside`
   }
 `
 
-export const Input = styled.input`
+export const InputWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   background: ${({ theme }) => theme.colors.input.background};
   color: ${({ theme }) => theme.colors.input.text};
   padding: 0.5rem 0.8rem;
-  width: 90%;
   border-radius: 1.5rem;
+  position: relative;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+
+  .search {
+    position: absolute;
+    left: 1rem;
+    flex-shrink: 0;
+  }
+
+  .clean {
+    position: absolute;
+    right: 1rem;
+    flex-shrink: 0;
+  }
+`
+
+export const Input = styled.input`
+  background: transparent;
+  color: inherit;
+  border: none;
+  width: 100%;
+  padding-left: 3rem;
+  flex: 1;
   font-size: 0.8rem;
   outline: none;
-  margin-bottom: 1rem;
 `
 
 export const Separator = styled.div`

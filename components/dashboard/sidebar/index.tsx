@@ -8,6 +8,7 @@ import { GET_POKEMONS } from '@/graphql/queries/get-pokemens'
 import { useDebounce } from '@/hooks/use-debouce'
 import { usePokemon } from '@/context/pokemon-context'
 import { Loading } from '@/components/loading'
+import { Search, X } from 'lucide-react'
 
 interface Pokemon {
   id: number
@@ -153,11 +154,23 @@ export function Sidebar() {
       </div>
 
       <div>
-        <S.Input
-          placeholder="Search by name or number"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <S.InputWrapper>
+          <Search size={16} className="search" />
+          <S.Input
+            placeholder="Search by name or number"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {search && (
+            <X
+              className="clean"
+              size={16}
+              onClick={() => setSearch('')}
+              style={{ cursor: 'pointer' }}
+            />
+          )}
+        </S.InputWrapper>
+
         <S.Separator />
       </div>
 

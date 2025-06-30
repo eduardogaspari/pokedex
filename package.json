@@ -22,6 +22,7 @@
     "apollo-server-micro": "^3.13.0",
     "graphql": "^16.11.0",
     "graphql-tag": "^2.12.6",
+    "lucide-react": "^0.525.0",
     "next": "15.3.4",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.1",
