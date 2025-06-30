@@ -12,8 +12,10 @@ export function ThemeSwitcher() {
       <Switch
         checked={isDarkTheme}
         onChange={toggleTheme}
-        onColor="#86d3ff"
-        onHandleColor="#2693e6"
+        onColor="#2563EB"
+        offColor="#fff"
+        onHandleColor="#1E40AF"
+        offHandleColor="#000"
         handleDiameter={30}
         uncheckedIcon={false}
         checkedIcon={false}
@@ -24,6 +26,7 @@ export function ThemeSwitcher() {
         className="react-switch"
         id="material-switch"
       />
+
       <Image src={'/light-moon.png'} alt="moon" height={30} width={30} />
     </Container>
   )
