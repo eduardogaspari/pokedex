@@ -10,6 +10,7 @@ import { Loading } from '@/components/loading'
 import { ThemeSwitcher } from '@/components/theme-switcher'
 
 interface EvolutionData {
+  id: number
   name: string
   sprite: string
 }
@@ -59,7 +60,13 @@ const STAT_NAME_ABBREVIATIONS: Record<string, string> = {
 }
 
 export function PokeDetail() {
-  const { loadingDetails, selectedPokemon, pokemonDetails } = usePokemon()
+  const {
+    loadingDetails,
+    selectedPokemon,
+    setSelectedPokemon,
+    pokemonDetails,
+  } = usePokemon()
+
   const [evolutionChain, setEvolutionChain] = useState<EvolutionData[]>([])
 
   const { messages, append, setMessages, isLoading } = useChat({
@@ -79,6 +86,8 @@ export function PokeDetail() {
     const parts = url.split('/')
     return parts[parts.length - 2]
   }, [])
+
+  console.log(evolutionChain)
 
   const formatHeight = useCallback((height: number): string => {
     const meters = height / 10
@@ -103,9 +112,11 @@ export function PokeDetail() {
 
       const traverse = (node: EvolutionChainNode) => {
         if (!node) return
+        const id = Number(getIdFromSpeciesUrl(node.species.url))
         result.push({
           name: node.species.name,
-          sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getIdFromSpeciesUrl(node.species.url)}.png`,
+          sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+          id,
         })
         if (node.evolves_to?.[0]) {
           traverse(node.evolves_to[0])
@@ -279,7 +290,13 @@ export function PokeDetail() {
                 <h2>Evolution Chain</h2>
                 <div>
                   {evolutionChain.map((evo) => (
-                    <div key={evo.name} className="evolution">
+                    <div
+                      key={evo.name}
+                      className="evolution"
+                      onClick={() =>
+                        setSelectedPokemon({ id: evo.id, name: evo.name })
+                      }
+                    >
                       <img src={evo.sprite} alt={formatPokemonName(evo.name)} />
                       <p>{formatPokemonName(evo.name)}</p>
                     </div>
